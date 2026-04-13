@@ -1,0 +1,84 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub/
+.pub-cache/
+build/
+coverage/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.metadata
+
+# Generated docs
+**/doc/api/
+
+# Windows / Flutter generated
+windows/flutter/generated_plugin_registrant.*
+windows/flutter/generated_plugins.cmake
+windows/flutter/
+
+# iOS / Xcode
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/.last_build_id
+ios/Runner.xcworkspace/
+ios/Runner/GeneratedPluginRegistrant.*
+*.xcuserdatad
+*.xcuserdata
+*.moved-aside
+*.xcuserstate
+DerivedData/
+
+# Android / Gradle
+android/.gradle/
+android/**/build/
+android/local.properties
+**/local.properties
+**/key.properties
+android/app/*.keystore
+android/app/*.jks
+**/captures/
+.gradle/
+**/gradle-wrapper.jar
+
+# Build variants (Android Studio)
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Obfuscation / symbolication
+app.*.symbols
+app.*.map.json
+
+# Sensitive / local config
+.env
+.env*
+google-services.json
+**/GoogleService-Info.plist
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+*.ipr
+*.iws
+
+# Miscellaneous
+*.class
+*.log
+*.tmp
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
