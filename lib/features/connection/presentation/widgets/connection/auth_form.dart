@@ -33,7 +33,7 @@ class AuthForm extends ConsumerWidget {
         const SizedBox(height: 4),
         CustomElevatedButton(
           text: state.isLoading ? 'Chargement...' : 'Se connecter',
-          onPressed: state.isLoading ? null : notifier.submit,
+          onPressed: state.isLoading ? null : () => notifier.submit(),
         ),
         const SizedBox(height: 16),
         if (state.errorMessage != null) ...[
