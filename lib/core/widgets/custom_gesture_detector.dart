@@ -19,11 +19,11 @@ class CustomGestureDetector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => this.onTap,
+      onTap: onTap,
       child: CircleAvatar(
-        radius: this.radius,
-        backgroundColor: this.backgroundColor,
-        child: Icon(this.icon),
+        radius: radius,
+        backgroundColor: backgroundColor,
+        child: Icon(icon, color: iconColor),
       ),
     );
   }
