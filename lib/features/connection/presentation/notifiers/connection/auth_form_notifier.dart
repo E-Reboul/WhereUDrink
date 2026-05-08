@@ -12,11 +12,11 @@ class AuthFormNotifier extends Notifier<AuthFormState> {
   }
 
   void updateEmail(String email) {
-    state = state.copyWith(email: email);
+    state = state.copyWith(email: email, clearErrorMessage: true);
   }
 
   void updatePassword(String password) {
-    state = state.copyWith(password: password);
+    state = state.copyWith(password: password, clearErrorMessage: true);
   }
 
   void updateIsLoading(bool isLoading) {
@@ -28,6 +28,12 @@ class AuthFormNotifier extends Notifier<AuthFormState> {
   }
 
   Future<void> submit() async {
+    final errorMessage = _validate();
+    if (errorMessage != null) {
+      state = state.copyWith(errorMessage: errorMessage);
+      return;
+    }
+
     state = state.copyWith(
       isLoading: true,
       clearErrorMessage: true,
@@ -36,5 +42,21 @@ class AuthFormNotifier extends Notifier<AuthFormState> {
     await Future<void>.delayed(const Duration(milliseconds: 300));
 
     state = state.copyWith(isLoading: false);
+  }
+
+  String? _validate() {
+    if (state.email.trim().isEmpty && state.password.trim().isEmpty) {
+      return 'Merci de renseigner ton email et ton mot de passe.';
+    }
+
+    if (state.email.trim().isEmpty) {
+      return 'Merci de renseigner ton email.';
+    }
+
+    if (state.password.trim().isEmpty) {
+      return 'Merci de renseigner ton mot de passe.';
+    }
+
+    return null;
   }
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:where_u_drink/features/connection/presentation/screens/register_screen.dart';
-import 'package:where_u_drink/features/connection/presentation/widgets/connection/auth_form.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:where_u_drink/features/connection/presentation/notifiers/register/register_form_notifier.dart';
+import 'package:where_u_drink/features/connection/presentation/widgets/register/register_form.dart';
 
-class AuthCard extends StatelessWidget {
-  const AuthCard({super.key});
+class RegisterCard extends ConsumerWidget {
+  const RegisterCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final notifier = ref.read(registerFormProvider.notifier);
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -44,29 +46,25 @@ class AuthCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Text(
-                  'Connexion',
+                  'Inscription',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 16),
-                const AuthForm(),
+                const RegisterForm(),
+                const SizedBox(height: 8),
                 Wrap(
                   alignment: WrapAlignment.center,
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    const Text('Pas encore de compte ?'),
+                    const Text('Déjà un compte ?'),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (_) => const Scaffold(
-                              body: SafeArea(child: RegisterScreen()),
-                            ),
-                          ),
-                        );
+                        notifier.reset();
+                        Navigator.of(context).pop();
                       },
-                      child: const Text('S\'inscrire'),
+                      child: const Text('Se connecter'),
                     ),
                   ],
                 ),
