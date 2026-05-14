@@ -4,6 +4,7 @@ import 'package:where_u_drink/core/widgets/custom_elevated_button.dart';
 import 'package:where_u_drink/core/widgets/custom_gesture_detector.dart';
 import 'package:where_u_drink/core/widgets/custom_text_field.dart';
 import 'package:where_u_drink/features/connection/presentation/notifiers/connection/auth_form_notifier.dart';
+import 'package:where_u_drink/features/home/presentation/screens/home_screen.dart';
 
 class AuthForm extends ConsumerWidget {
   const AuthForm({super.key});
@@ -34,7 +35,20 @@ class AuthForm extends ConsumerWidget {
         const SizedBox(height: 8),
         CustomElevatedButton(
           text: state.isLoading ? 'Chargement...' : 'Se connecter',
-          onPressed: state.isLoading ? null : () => notifier.submit(),
+          onPressed: state.isLoading
+              ? null
+              : () async {
+                  await notifier.submit(skipValidation: true);
+                  if (!context.mounted) {
+                    return;
+                  }
+
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const HomeScreen(),
+                    ),
+                  );
+                },
           backgroundColor: WidgetStatePropertyAll(colorScheme.primary),
           foregroundColor: WidgetStatePropertyAll(colorScheme.onPrimary),
         ),
