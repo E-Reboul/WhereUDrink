@@ -27,11 +27,13 @@ class AuthFormNotifier extends Notifier<AuthFormState> {
     state = state.copyWith(errorMessage: errorMessage);
   }
 
-  Future<void> submit() async {
-    final errorMessage = _validate();
-    if (errorMessage != null) {
-      state = state.copyWith(errorMessage: errorMessage);
-      return;
+  Future<bool> submit({bool skipValidation = false}) async {
+    if (!skipValidation) {
+      final errorMessage = _validate();
+      if (errorMessage != null) {
+        state = state.copyWith(errorMessage: errorMessage);
+        return false;
+      }
     }
 
     state = state.copyWith(
@@ -42,6 +44,7 @@ class AuthFormNotifier extends Notifier<AuthFormState> {
     await Future<void>.delayed(const Duration(milliseconds: 300));
 
     state = state.copyWith(isLoading: false);
+    return true;
   }
 
   String? _validate() {

@@ -79,7 +79,7 @@ class RegisterFormNotifier extends Notifier<RegisterFormState> {
     );
   }
 
-  Future<void> submit() async {
+  Future<bool> submit() async {
     state = state.copyWith(
       isLoading: true,
       clearErrorMessage: true,
@@ -91,12 +91,13 @@ class RegisterFormNotifier extends Notifier<RegisterFormState> {
         isLoading: false,
         errorMessage: errorMessage,
       );
-      return;
+      return false;
     }
 
     await Future<void>.delayed(const Duration(milliseconds: 300));
 
     state = state.copyWith(isLoading: false);
+    return true;
   }
 
   String? _validateCurrentStep({bool validateAll = false}) {

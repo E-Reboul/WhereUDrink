@@ -4,6 +4,7 @@ import 'package:where_u_drink/core/widgets/custom_elevated_button.dart';
 import 'package:where_u_drink/features/connection/presentation/notifiers/register/register_form_notifier.dart';
 import 'package:where_u_drink/features/connection/presentation/widgets/register/register_step_one_form.dart';
 import 'package:where_u_drink/features/connection/presentation/widgets/register/register_step_two_form.dart';
+import 'package:where_u_drink/features/home/presentation/screens/home_screen.dart';
 
 class RegisterForm extends ConsumerWidget {
   const RegisterForm({super.key});
@@ -55,9 +56,24 @@ class RegisterForm extends ConsumerWidget {
                         : 'Continuer',
                 onPressed: state.isLoading
                     ? null
-                    : () => isLastStep
-                        ? notifier.submit()
-                        : notifier.nextStep(),
+                    : () async {
+                        if (!isLastStep) {
+                          notifier.nextStep();
+                          return;
+                        }
+
+                        final isSubmitted = await notifier.submit();
+                        if (!context.mounted || !isSubmitted) {
+                          return;
+                        }
+
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const HomeScreen(),
+                          ),
+                          (_) => false,
+                        );
+                      },
               ),
             ),
           ],
