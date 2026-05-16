@@ -24,6 +24,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Where U Drink utilise la camera pour prendre une photo a publier.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Where U Drink utilise ta position pour associer un lieu a ton post.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

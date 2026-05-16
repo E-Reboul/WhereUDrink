@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:where_u_drink/features/home/presentation/widgets/camera_post_tab.dart';
 import 'package:where_u_drink/features/home/presentation/widgets/home_map_tab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         index: _selectedIndex,
         children: const [
           HomeMapTab(),
-          _HomePlaceholder(icon: Icons.photo_camera_outlined),
+          CameraPostTab(),
           _HomePlaceholder(icon: Icons.person_outline),
           _HomePlaceholder(icon: Icons.settings_outlined),
         ],
